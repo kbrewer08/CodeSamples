@@ -155,13 +155,13 @@ void listMovieSorted(const TREE_NODE* root)
 */
 void checkReHash(MOVIE_HEAD* movieHead)
 {
-    int i;
-	int j;
-    int newTableSize;
-    float hashTableLoad;
+    int         i;
+    int         j;
+    int         newTableSize;
+    float       hashTableLoad;
     MOVIE_HEAD* tempMovie;
     HASH_ENTRY* newTable;
-    MOVIE* data;
+    MOVIE*      data;
 
     tempMovie = NULL;
     newTable  = NULL;
