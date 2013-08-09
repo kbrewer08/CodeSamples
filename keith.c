@@ -396,12 +396,12 @@ void destroyOldTable(MOVIE_HEAD* movieHead)
     HASH_ENTRY* pHash;
 
     tableSize = movieHead->hashTableSize;
-    pHash = movieHead->pHash;
+    pHash     = movieHead->pHash;
 
     for(i = 0; i < tableSize; i++)
     {
         pHash[i].pData = NULL;
-        pHash[i].list = destroyListPartial(pHash[i].list);
+        pHash[i].list  = destroyListPartial(pHash[i].list);
     }
 
     free(pHash);
@@ -417,18 +417,19 @@ void destroyOldTable(MOVIE_HEAD* movieHead)
 */
 LIST* destroyListPartial(LIST* pList)
 {
-	NODE* deletePtr;
+    NODE* deletePtr;
 
-	if (pList)
+    if(pList)
     {
-	    while (pList->count > 0)
+	while (pList->count > 0)
         {
             deletePtr    = pList->head;
-	        pList->head  = pList->head->link;
-	        pList->count--;
-	        free (deletePtr);
+	    pList->head  = pList->head->link;
+	    pList->count--;
+	    free(deletePtr);
         }
-	    free (pList);
+	free(pList);
     }
-	return NULL;
+
+    return NULL;
 }
