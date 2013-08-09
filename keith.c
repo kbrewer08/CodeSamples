@@ -100,9 +100,9 @@ void findMovieManager(const MOVIE_HEAD* movieHead)
 */
 void listMovieTable(const MOVIE_HEAD* movieHead)
 {
-    int i;
-	int j;
-    MOVIE* dataOut;
+    int         i;
+    int         j;
+    MOVIE*      dataOut;
     HASH_ENTRY* hashTable;
 
     hashTable = movieHead->pHash;
@@ -391,8 +391,8 @@ void printOneTitle(void* arg1)
 */
 void destroyOldTable(MOVIE_HEAD* movieHead)
 {
-	int i;
-    int tableSize;
+    int         i;
+    int         tableSize;
     HASH_ENTRY* pHash;
 
     tableSize = movieHead->hashTableSize;
