@@ -7,7 +7,7 @@ DFedit is a Win32 GUI based application. It's goal is to edit the save files for
 
 Normally named files do what they indicate. Files that include "TabWndCtrls" in their name are the files that control all of the GUI elements on that particular tab of the interface. 
 
-A sample file, named DR_FORCE_02.bin, is included in the same folder as the binary (\bin\Release). To use the program, just open the that file and off you go. 
+To try the program, click on DFedit_app_with_sample_file.7z on github, then click "View Raw". This should download a 7zip archive of the release exe plus a sample file to use the program with.
 
 The codebase currently stands at 32 source files with 11,039 lines of code (code + code and comments). It was written in the Code::Blocks IDE. It was built using the TDM version of the MinGW compiler. As long as you include the following library files (for the Win32 elements) in your linker settings, this project should build just fine. 
 
