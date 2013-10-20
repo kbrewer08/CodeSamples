@@ -1,0 +1,33 @@
+#include <windows.h>
+
+#include "resource.h"
+
+#ifndef IDC_STATIC
+#define IDC_STATIC -1
+#endif
+
+IDR_MENUBAR MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open", ID_FILE_OPEN
+        MENUITEM "E&xit", ID_FILE_EXIT
+    END
+
+    POPUP "&About"
+    BEGIN
+        MENUITEM "A&bout", ID_ABOUT
+    END
+END
+
+IDI_MYICON ICON "dfedit.ico"
+
+ID_ABOUT DIALOG DISCARDABLE  0, 0, 239, 66
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Dragon Force Edit 2.31"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&OK", IDOK, 174, 26, 50, 14
+    GROUPBOX        "About DFedit 2.31", IDC_STATIC, 7, 7, 225, 52
+    CTEXT           "\nDragon Force Edit created by KB\nDragonForceEdit@gmail.com", IDC_STATIC,16,18,144,33
+END
