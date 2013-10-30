@@ -1,0 +1,1 @@
+This folder contains examples of common problems asked as evaluations of someone's knowledge content (ex.: of algorithms) and/or thought process when coding. 
