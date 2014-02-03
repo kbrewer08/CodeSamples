@@ -2007,7 +2007,7 @@ void MassEditUpdateCasAffected(const int casOwner)
 void PopulateCastleOwners(void)
 {
     int j         = 0;
-    int currOwner = 171; //used as invalid owner indicator; max is 170
+    int currOwner = 172; //used as invalid owner indicator; max is 170
 
     castleOwnerCount = 0;
 
@@ -2017,7 +2017,7 @@ void PopulateCastleOwners(void)
         for(j = 0; j < castleOwnerCount; j++)
         {
             if(castleOwners[j] == currOwner)
-                j = 171;
+                j = 172;
         }
         if(j == castleOwnerCount)
         {
@@ -2034,7 +2034,7 @@ void PopulateCastleOwners(void)
     {
         if(castleOwners[i] < 171)
             SendMessage(MassEditTabCtrls.cb_MassEditCasOwnerList, CB_ADDSTRING, 0, LPARAM(generalsNameList[castleOwners[i]]));
-        if(castleOwners[i] >= 171)
+        if(castleOwners[i] == 171)
             SendMessage(MassEditTabCtrls.cb_MassEditCasOwnerList, CB_ADDSTRING, 0, LPARAM(TEXT("None")));
     }
     
@@ -2227,7 +2227,7 @@ LRESULT CALLBACK MassEditTabWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
                     {
                         case LBN_SELCHANGE:
                         {
-                            int  count   = SendMessage(MassEditTabCtrls.lb_MassEditGenList, LB_GETSELCOUNT, 0, 0);;
+                            int  count   = SendMessage(MassEditTabCtrls.lb_MassEditGenList, LB_GETSELCOUNT, 0, 0);
                             int* genBuff = (int*)malloc(sizeof(int) * count);
                             SendMessage(MassEditTabCtrls.lb_MassEditGenList, LB_GETSELITEMS, WPARAM(count), LPARAM(genBuff));
 

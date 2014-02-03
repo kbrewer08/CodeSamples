@@ -24,8 +24,9 @@ public:
     int  openFileForWrite (void);
     void closeFile        (void);
 
-    int writeOneElementToFile(int address, int bytes, ushort newValue, int index);
-    int writeGenOwner(ushort newOwner, int index);
+    int writeOneElementToFile (int address, int bytes, ushort newValue, int index);
+    int writeGenOwner         (ushort newOwner, int index);
+    int writeInventoryToFile  (void);
 
 };
 

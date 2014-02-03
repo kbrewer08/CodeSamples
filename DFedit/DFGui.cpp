@@ -7,7 +7,8 @@
 
 #include "DFGui.h"
 
-const TCHAR* DFeditVersion = TEXT("DFedit 2.31");
+const TCHAR* DFeditVerShort = TEXT("DFedit 2.4");
+const TCHAR* DFeditVerLong  = TEXT("Dragon Force Edit 2.4");
 
 HWND hMainWindow = NULL; // main window
 HWND hDlgCurrent = NULL; //for the message loop thing
@@ -54,7 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     hMainWindow = CreateWindowEx(
         0,
         g_szClassName,
-        TEXT("Dragon Force Edit 2.31"),
+        DFeditVerLong,
         (WS_SYSMENU | WS_MINIMIZEBOX | WS_TABSTOP) & ~WS_MAXIMIZEBOX,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -77,6 +78,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     CreateCastlesTab();
     CreateDivisionsTab();
     CreateMassEditTab();
+    CreateItemsTab();
 
     ShowWindow(hMainWindow, nCmdShow);
     UpdateWindow(hMainWindow);
@@ -126,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         dr.fw.savefileName = szFileName;
                         if (!openFileForReading())
                         {
-                            MessageBox(hwnd, TEXT("Could not open file."), DFeditVersion, MB_OK | MB_ICONERROR);
+                            MessageBox(hwnd, TEXT("Could not open file."), DFeditVerShort, MB_OK | MB_ICONERROR);
                             szFileName[0]  = '\0';
                             szTitleName[0] = '\0';
                             dr.drFileName = "";
@@ -139,12 +141,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 PopulateCastlesTab();
                                 PopulateDivisionsTab();
                                 PopulateMassEditTab();
-                                sprintf(windowTitle, "Dragon Force Edit 2.31 - Playing as %s", generalsNameList[dr.playingAs]);
+                                PopulateItemsTab();
+                                sprintf(windowTitle, "%s - Playing as %s",DFeditVerLong, generalsNameList[dr.playingAs]);
                                 SetWindowText(hMainWindow, windowTitle);
                                 alreadyOpened = 1;
                             }
                             else
-                                MessageBox(hwnd, TEXT("File does not appear to be a valid SSF Dragon Force savefile."), DFeditVersion, MB_OK | MB_ICONERROR);
+                                MessageBox(hwnd, TEXT("File does not appear to be a valid SSF Dragon Force savefile."), DFeditVerShort, MB_OK | MB_ICONERROR);
                         }
                     }
                 break;
@@ -185,7 +188,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     {
                         int gen = SendMessage(GenTabCtrls.cb_GenNameList, CB_GETCURSEL, 0, 0); //get selected General ID
 
-                        ShowWindow(hTabMisc, SW_HIDE);
+                        ShowWindow(hTabKingdoms, SW_HIDE);
                         ShowWindow(hTabItemInv, SW_HIDE);
                         ShowWindow(hTabMassEdit, SW_HIDE);
                         ShowWindow(hTabDivisions, SW_HIDE);
@@ -203,7 +206,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     {
                         int cas = SendMessage(CasTabCtrls.cb_CasNameList, CB_GETCURSEL, 0, 0); //get selected castle ID
 
-                        ShowWindow(hTabMisc, SW_HIDE);
+                        ShowWindow(hTabKingdoms, SW_HIDE);
                         ShowWindow(hTabItemInv, SW_HIDE);
                         ShowWindow(hTabMassEdit, SW_HIDE);
                         ShowWindow(hTabDivisions, SW_HIDE);
@@ -221,7 +224,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     {
                         int div = SendMessage(DivTabCtrls.cb_DivNameList, CB_GETCURSEL, 0, 0);
 
-                        ShowWindow(hTabMisc, SW_HIDE);
+                        ShowWindow(hTabKingdoms, SW_HIDE);
                         ShowWindow(hTabItemInv, SW_HIDE);
                         ShowWindow(hTabMassEdit, SW_HIDE);
                         ShowWindow(hTabCastles, SW_HIDE);
@@ -237,7 +240,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     break;
                     case 3:
                     {
-                        ShowWindow(hTabMisc, SW_HIDE);
+                        ShowWindow(hTabKingdoms, SW_HIDE);
                         ShowWindow(hTabItemInv, SW_HIDE);
                         ShowWindow(hTabDivisions, SW_HIDE);
                         ShowWindow(hTabCastles, SW_HIDE);
@@ -248,8 +251,34 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         return 0;
                     }
                     break;
+                    case 4:
+                    {
+                        ShowWindow(hTabKingdoms, SW_HIDE);
+                        ShowWindow(hTabItemInv, SW_SHOW);
+                        ShowWindow(hTabDivisions, SW_HIDE);
+                        ShowWindow(hTabCastles, SW_HIDE);
+                        ShowWindow(hTabGenerals, SW_HIDE);
+                        ShowWindow(hTabMassEdit, SW_HIDE);
+
+                        SetFocus(hTabCntrl);
+                        return 0;
+                    }
+                    break;
+                    case 5:
+                    {
+                        ShowWindow(hTabKingdoms, SW_SHOW);
+                        ShowWindow(hTabItemInv, SW_HIDE);
+                        ShowWindow(hTabDivisions, SW_HIDE);
+                        ShowWindow(hTabCastles, SW_HIDE);
+                        ShowWindow(hTabGenerals, SW_HIDE);
+                        ShowWindow(hTabMassEdit, SW_HIDE);
+
+                        SetFocus(hTabCntrl);
+                        return 0;
+                    }
+                    break;
                     default:
-                        // don't do anything if the tab item isn't 0 through 3
+                        // don't do anything if the tab item isn't 0 through 5
                         break;
                 }
             }

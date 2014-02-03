@@ -13,6 +13,8 @@ ushort gameYear;
 ushort gameMonth;
 ushort gameWeek;
 
+ushort itemInventoryBuffer[256];
+
 const char monarchFilename[8][5] = //used for finding out who the player's monarch is
 {
     "Wein",
@@ -747,6 +749,10 @@ DragonForce::DragonForce(const DragonForce& rhsDF)
     j = rhsDF.capHolder.numHeld;
     for(int i = 0; i < j; i++)
         capHolder.holdArea[i] = rhsDF.capHolder.holdArea[i];
+
+    for(i = 0; i < rhsDF.itemInv.numItems; i++)
+        itemInv.items[i] = rhsDF.itemInv.items[i];
+    itemInv.numItems = rhsDF.itemInv.numItems;
 }
 
 
@@ -776,6 +782,10 @@ DragonForce& DragonForce::operator=(const DragonForce& rhsDF)
     j = rhsDF.capHolder.numHeld;
     for(int i = 0; i < j; i++)
         capHolder.holdArea[i] = rhsDF.capHolder.holdArea[i];
+
+    for(i = 0; i < rhsDF.itemInv.numItems; i++)
+        itemInv.items[i] = rhsDF.itemInv.items[i];
+    itemInv.numItems = rhsDF.itemInv.numItems;
 
     return *this;
 }
@@ -887,6 +897,27 @@ void DragonForce::initDivisions(void)
     return;
 }
 
+void DragonForce::initItemInv(void)
+{
+    for(int i = 0; i < 256; i++)
+    {
+        if(itemInventoryBuffer[i])
+        {
+            itemInv.items[i] = itemInventoryBuffer[i];
+            itemInv.numItems++;        
+        }
+        else
+            i = 256;
+    }
+
+    return;
+}
+
+void DragonForce::initKingdoms(void)
+{
+    return;
+}
+
 void DragonForce::findActiveDiv(void)
 {
     for(int i = 0; i < 171; i++)
@@ -907,6 +938,50 @@ void DragonForce::findNewRulers(const int oldRuler)
     return;
 }
 
+void DragonForce::addItemsInv(const int* const items, const int count)
+{
+    int numItems = itemInv.numItems;
+
+    if(count > 0)
+    {
+        for(int i = 0; (i < count) && (numItems < 256); i++)
+        {
+            itemInv.items[numItems] = items[i];
+            numItems++;
+        }
+
+        itemInv.numItems = numItems;
+        insertionSort((int*)itemInv.items, itemInv.numItems);
+
+        for(int i = 0; i < 256; i++)
+            itemInventoryBuffer[i] = itemInv.items[i];
+    }
+
+    return;
+}
+
+void DragonForce::delItemsInv(const int* const items, const int count)
+{
+    for(int i = 0; i < count; i++)
+        itemInv.items[items[i]] = 171;
+
+    insertionSort(itemInv.items, itemInv.numItems);
+    itemInv.numItems -= count;
+
+    for(int i = 0; i < itemInv.numItems; i++)
+        itemInventoryBuffer[i] = itemInv.items[i];
+
+    for(int i = itemInv.numItems; i < 256; i++)
+        itemInventoryBuffer[i] = 0;
+
+    return;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// GLOBALS
+//
+////////////////////////////////////////////////////////////////////////////////
 ushort packByte(ushort highNibble, ushort lowNibble)
 {
     return lowNibble | (highNibble << 4);

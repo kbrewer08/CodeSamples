@@ -74,3 +74,24 @@ int FileWriter::writeGenOwner(ushort newOwner, int index)
 
     return isGood;
 }
+
+int FileWriter::writeInventoryToFile(void)
+{
+    int isGood = 0;
+
+    if(!fpSavegame.is_open())
+        openFileForWrite();
+
+    for(int i = 0; i < 256; i++)
+        itemInventoryBuffer[i] = rotateLeft(itemInventoryBuffer[i], 8);
+
+    fpSavegame.seekg(ITEM_INVENTORY);
+    fpSavegame.write(reinterpret_cast<char*>(itemInventoryBuffer), 512);
+
+    if(fpSavegame.good())
+        isGood = 1;
+
+    closeFile();
+
+    return isGood;
+}

@@ -1327,6 +1327,7 @@ void PopulateGeneralsTab(void)
     dr.setMonarch();    //find who the player's monarch is
     dr.initCastles();   //create the castles array
     dr.initDivisions(); //create the divisions array
+    dr.initItemInv();   //create the item inventory from domestic affairs
 
     EnableWindow(GenTabCtrls.cb_GenNameList, TRUE); //turn on names list combobox
     EnableWindow(GenTabCtrls.cb_GenOwnerList, TRUE); //turn on owner's list combobox

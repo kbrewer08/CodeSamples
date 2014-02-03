@@ -5,17 +5,20 @@ HWND hTabCntrl = NULL;   // The main tab control
 HWND hTabGenerals = NULL;
 GENERALS_TAB GenTabCtrls; //struct to contain all the controls for Generals tab
 
-HWND hTabCastles   = NULL;
+HWND hTabCastles = NULL;
 CASTLES_TAB CasTabCtrls; //struct to contain all the controls for Castles tab
 
 HWND hTabDivisions = NULL;
 DIVISIONS_TAB DivTabCtrls; //struct to contain all the controls for Divisions tab
 
-HWND hTabMassEdit  = NULL;
+HWND hTabMassEdit = NULL;
 MASSEDIT_TAB MassEditTabCtrls;
 
-HWND hTabItemInv   = NULL;
-HWND hTabMisc      = NULL;
+HWND hTabItemInv = NULL;
+ITEMS_TAB ItemsTabCtrls;
+
+HWND hTabKingdoms = NULL;
+KINGDOMS_TAB KingdomTabCtrls;
 
 void CreateTabControl(void)
 {
@@ -101,10 +104,10 @@ void CreateTabControl(void)
         MessageBox(NULL, TEXT("Couldn't add Mass Editing tab"), TEXT("Tab Creation"), MB_OK | MB_ICONERROR);
         return;
     }
-/*
+
     // set up tab item structure for Tab5
     // (reusing same structure, just changing the text)
-    CHAR pszTab5 [] = "Items";  // tab5's text  (2-step process necessary to avoid compiler warnings)
+    CHAR pszTab5 [] = TEXT("Items");  // tab5's text  (2-step process necessary to avoid compiler warnings)
     tie.pszText = pszTab5;  // the tab's text/caption
 
     // attempt to insert Tab5
@@ -112,13 +115,13 @@ void CreateTabControl(void)
     {
         // couldn't insert tab item
         DestroyWindow(hTabCntrl);
-        MessageBox(NULL, "Couldn't add Item tab", "Tab Creation", MB_OK | MB_ICONERROR);
+        MessageBox(NULL, TEXT("Couldn't add Item tab"), TEXT("Tab Creation"), MB_OK | MB_ICONERROR);
         return;
     }
 
     // set up tab item structure for Tab6
     // (reusing same structure, just changing the text)
-    CHAR pszTab6 [] = "Misc";  // tab6's text  (2-step process necessary to avoid compiler warnings)
+    CHAR pszTab6 [] = "Kingdom Status";  // tab6's text  (2-step process necessary to avoid compiler warnings)
     tie.pszText = pszTab6;  // the tab's text/caption
 
     // attempt to insert Tab6
@@ -126,9 +129,9 @@ void CreateTabControl(void)
     {
         // couldn't insert tab item
         DestroyWindow(hTabCntrl);
-        MessageBox(NULL, "Couldn't add Misc tab", "Tab Creation", MB_OK | MB_ICONERROR);
+        MessageBox(NULL, "Couldn't add Kingdom Status tab", "Tab Creation", MB_OK | MB_ICONERROR);
         return;
     }
-*/
+
     return;
 }

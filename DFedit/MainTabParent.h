@@ -261,6 +261,19 @@ typedef struct
     HWND but_ME_SetCasTrpCnt;
 } MASSEDIT_TAB;
 
+typedef struct
+{
+    HWND lb_itemInvList;
+    HWND lb_fullItemList;
+    HWND but_removeItems;
+    HWND but_addItems;
+} ITEMS_TAB;
+
+typedef struct
+{
+    
+} KINGDOMS_TAB;
+
 extern HWND hTabCntrl;   // The main tab control
 
 extern HWND hTabGenerals;
@@ -276,7 +289,10 @@ extern HWND hTabMassEdit;
 extern MASSEDIT_TAB MassEditTabCtrls;
 
 extern HWND hTabItemInv;
-extern HWND hTabMisc;
+extern ITEMS_TAB ItemsTabCtrls;
+
+extern HWND hTabKingdoms;
+extern KINGDOMS_TAB KingdomTabCtrls;
 
 void CreateTabControl (void);
 

@@ -101,10 +101,10 @@ void FileReader::readGameInfo(void)
 
     fseek(savegameIn, GAME_YEAR, SEEK_SET);
     fread(&gameYear, 2, 1, savegameIn);
-
-    fseek(savegameIn, ITEM_INVENTORY, SEEK_SET);
-    fread(itemInventoryBuffer, 2, 255, savegameIn);
-
+*/
+    fpSavegame.seekg(ITEM_INVENTORY);
+    fpSavegame.read(reinterpret_cast<char*>(itemInventoryBuffer), 512);
+/*
     fseek(savegameIn, AWARDS_LEFT, SEEK_SET);
     fread(&awardsLeft, 2, 1, savegameIn);
 
@@ -112,10 +112,10 @@ void FileReader::readGameInfo(void)
     gameMonth  = rotateLeft(gameMonth, 8);
     gameWeek   = rotateLeft(gameWeek, 8);
     awardsLeft = rotateLeft(awardsLeft, 8);
-
-    for(int i = 0; i < 255; i++)
-        itemInventoryBuffer[i] = rotateLeft(itemInventoryBuffer[i], 8);
 */
+    for(int i = 0; i < 256; i++)
+        itemInventoryBuffer[i] = rotateLeft(itemInventoryBuffer[i], 8);
+
     return;
 }
 

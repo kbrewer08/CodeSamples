@@ -119,7 +119,7 @@ class DragonForce;
 #define CASTLE_OWNERSHIP 0x41D8     // 41D8 to 41F9, one byte each.  (16856 to 16889)
 #define CASTLE_EXPERIENCE 0x4200    // 4200 to 4242, two bytes each. (16896 to 16962)
 #define CASTLE_CURR_TROOPS 0x4250   // 4250 to 4292, two bytes each. (16972 to 17042)
-#define ITEM_INVENTORY 0x42F0       // 42F0 to 44EE, two bytes each. (17136 to 17646)
+#define ITEM_INVENTORY 0x42F0       // 42F0 to 44EF, two bytes each. (17136 to 17647)
 
 using namespace std;
 
@@ -128,6 +128,8 @@ extern char   playingAs_cstr[5];
 extern ushort gameYear;
 extern ushort gameMonth;
 extern ushort gameWeek;
+
+extern ushort itemInventoryBuffer[256];
 
 extern const char monarchFilename[8][5];
 
@@ -229,11 +231,10 @@ typedef struct
 
 typedef struct //for kingdoms
 {
+    char kingdomeName[9];
     char kingdomRuler[9];
     int  numCastles;
     int  numGenerals;
-    char ownedCastles[34][9];
-    char ownedGenerals[171][12];
     int  ownedCastlesIndex[34];
     int  ownedGeneralsIndex[171];
     int  kingdomWins;
@@ -242,21 +243,15 @@ typedef struct //for kingdoms
 
 typedef struct //for Item Inventory
 {
-    ushort itemInventory[255];
-    int numberOfItems;
+    int items[256];
+    int numItems;
 } ITEM_INVENT;
-
-/*
-KINGDOM kingdoms[8];
-
-ushort      itemInventoryBuffer[255] = {0};
-ITEM_INVENT itemInvent;
-*/
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-// DragonForceFile class declaration
+// DragonForce class declaration
 //
+////////////////////////////////////////////////////////////////////////////////
 
 class DragonForce
 {
@@ -270,10 +265,13 @@ public:
     General  genArr[171];
     Castle   casArr[34];
     Division divArr[171];
+    KINGDOM  kingdoms[8];
+    
+    ITEM_INVENT itemInv;
 
     CAPTIVE_HOLDER capHolder;
     
-    DragonForce (void) : drFileName(""), playingAs(-1), capHolder() {}
+    DragonForce (void) : drFileName(""), playingAs(-1), itemInv(), capHolder() {}
     DragonForce (char savefileName[]) : drFileName(savefileName), fr(savefileName) {}
     ~DragonForce(void) {}
 
@@ -284,8 +282,12 @@ public:
     void initGenerals  (void);
     void initCastles   (void);
     void initDivisions (void);
+    void initItemInv   (void);
+    void initKingdoms  (void);
     void findActiveDiv (void);
     void findNewRulers (const int oldRuler);
+    void addItemsInv   (const int* const items, const int count);
+    void delItemsInv   (const int* const items, const int count);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
