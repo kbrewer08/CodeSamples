@@ -10,7 +10,7 @@ typedef unsigned char uchar;
 #include "GenTabWndCtrls.h"
 #include "InvTabWndCtrls.h"
 #include "MassEditTabWndCtrls.h"
-#include "MiscTabWndCtrls.h"
+#include "KingdomsTabWndCtrls.h"
 
 #include "DragonForce.h"
 #include "FileMenu.h"

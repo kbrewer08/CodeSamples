@@ -303,17 +303,17 @@ int General::editMedals(ushort newMedalCount, int troopTypeToChange, ushort* pac
 
 //packing two pieces of information into one byte
     if(nibbleToChange == 1)
-        newPackedMedalByte = packByte(highNibble, newMedalCount);
+        newPackedMedalByte = g_packByte(highNibble, newMedalCount);
     if(nibbleToChange == 2)
-        newPackedMedalByte = packByte(newMedalCount, lowNibble);
+        newPackedMedalByte = g_packByte(newMedalCount, lowNibble);
 //if the medals are set to zero, pack -1 (hex F) into that portion of the byte, since that's what the game uses for "non-existent"
     if(!newMedalCount)
     {
         newMedalCount = 15;
         if(nibbleToChange == 1)
-            newPackedMedalByte = packByte(highNibble, newMedalCount);
+            newPackedMedalByte = g_packByte(highNibble, newMedalCount);
         if(nibbleToChange == 2)
-            newPackedMedalByte = packByte(newMedalCount, lowNibble);
+            newPackedMedalByte = g_packByte(newMedalCount, lowNibble);
         newMedalCount = 0;
     //if these are the currently selected troops, and medals are set to none, change current troop type to none
         if(troopIndex == troopTypeToChange)

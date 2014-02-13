@@ -71,6 +71,8 @@
 		<Unit filename="General.h" />
 		<Unit filename="InvTabWndCtrls.cpp" />
 		<Unit filename="InvTabWndCtrls.h" />
+		<Unit filename="KingdomsTabWndCtrls.cpp" />
+		<Unit filename="KingdomsTabWndCtrls.h" />
 		<Unit filename="MainTabParent.cpp" />
 		<Unit filename="MainTabParent.h" />
 		<Unit filename="MassEditTabWndCtrls.cpp" />

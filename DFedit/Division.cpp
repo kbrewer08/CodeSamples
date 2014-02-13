@@ -248,7 +248,7 @@ bool Division::addMultiGenFromList(int* const genBuff, const int genCount)
                 genDeleted++;
                 j = numMembers;
             }
-    insertionSort(genBuff, gCount);
+    g_insertionSort(genBuff, gCount);
     gCount -= genDeleted;
     if(!gCount)
         return false;
@@ -262,7 +262,7 @@ bool Division::addMultiGenFromList(int* const genBuff, const int genCount)
         genAdder++;
         gensAdded = true;
     }
-     insertionSort(members, numMembers); //after adding members, sort list
+     g_insertionSort(members, numMembers); //after adding members, sort list
 
     return gensAdded;
 }
@@ -347,7 +347,7 @@ bool Division::addMultiCapFromList(int* const capBuff, const int capCount)
                 capsDeleted++;
                 j = numMembers;
             }
-    insertionSort(capBuff, cCount);
+    g_insertionSort(capBuff, cCount);
     cCount -= capsDeleted;
     if(!cCount)
         return false;
@@ -362,7 +362,7 @@ bool Division::addMultiCapFromList(int* const capBuff, const int capCount)
                 capsDeleted++;
                 j = numCaptives;
             }
-    insertionSort(capBuff, cCount);
+    g_insertionSort(capBuff, cCount);
     cCount -= capsDeleted;
     if(!cCount)
         return false;
@@ -376,7 +376,7 @@ bool Division::addMultiCapFromList(int* const capBuff, const int capCount)
         capAdder++;
         captivesAdded = true;
     }
-     insertionSort(captives, numCaptives); //after adding captives, sort list
+     g_insertionSort(captives, numCaptives); //after adding captives, sort list
 
     return captivesAdded;
 }
@@ -454,7 +454,7 @@ int Division::fromGenToCap(int* const genBuff, const int genCount)
         success = 1;
     }
 
-    insertionSort(captives, numCaptives);
+    g_insertionSort(captives, numCaptives);
 
     if(needRuler)
     {
@@ -498,7 +498,7 @@ bool Division::fromCapToGen(int* const capBuff, const int capCount)
         capsPromoted = true;
     }
 
-    insertionSort(members, numMembers);
+    g_insertionSort(members, numMembers);
 
     return capsPromoted;
 }
@@ -568,7 +568,7 @@ void Division::addMember_a(const int genIndex)
             dr.genArr[genIndex].setLocation(0, divNum);
         }
         troopCount += dr.genArr[genIndex].currentTroopCount;
-        insertionSort(members, numMembers);
+        g_insertionSort(members, numMembers);
     }
 
     return;
@@ -628,7 +628,7 @@ void Division::cleanCaptiveHolder(void)
                 dr.genArr[captives[i]].setStatus(4,1); //captive owned by AI
         }
         dr.capHolder.numHeld = 0;
-        insertionSort(captives, numCaptives);
+        g_insertionSort(captives, numCaptives);
     }
 
     return;

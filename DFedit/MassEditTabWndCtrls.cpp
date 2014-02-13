@@ -2027,7 +2027,7 @@ void PopulateCastleOwners(void)
     }
 
     if(castleOwnerCount)
-        insertionSort(castleOwners, castleOwnerCount);
+        g_insertionSort(castleOwners, castleOwnerCount);
 
     SendMessage(MassEditTabCtrls.cb_MassEditCasOwnerList, CB_RESETCONTENT, 0, 0);
     for(int i = 0; i < castleOwnerCount; i++)

@@ -108,13 +108,13 @@ void FileReader::readGameInfo(void)
     fseek(savegameIn, AWARDS_LEFT, SEEK_SET);
     fread(&awardsLeft, 2, 1, savegameIn);
 
-    gameYear   = rotateLeft(gameYear, 8);
-    gameMonth  = rotateLeft(gameMonth, 8);
-    gameWeek   = rotateLeft(gameWeek, 8);
-    awardsLeft = rotateLeft(awardsLeft, 8);
+    gameYear   = g_rotateLeft(gameYear, 8);
+    gameMonth  = g_rotateLeft(gameMonth, 8);
+    gameWeek   = g_rotateLeft(gameWeek, 8);
+    awardsLeft = g_rotateLeft(awardsLeft, 8);
 */
     for(int i = 0; i < 256; i++)
-        itemInventoryBuffer[i] = rotateLeft(itemInventoryBuffer[i], 8);
+        itemInventoryBuffer[i] = g_rotateLeft(itemInventoryBuffer[i], 8);
 
     return;
 }
@@ -360,22 +360,22 @@ void FileReader::fixTwoByteGeneralsArrays(void)
 {
     for(int i = 0; i < 171; i++)
     {
-        currExpBuffer[i]      = rotateLeft(currExpBuffer[i], 8);
-        totalWinBuffer[i]     = rotateLeft(totalWinBuffer[i], 8);
-        totalLossBuffer[i]    = rotateLeft(totalLossBuffer[i], 8);
-        winsLastWeekBuffer[i] = rotateLeft(winsLastWeekBuffer[i], 8);
-        lossLastWeekBuffer[i] = rotateLeft(lossLastWeekBuffer[i], 8);
-        newMeritsBuffer[i]    = rotateLeft(newMeritsBuffer[i], 8);
-        oldMeritsBuffer[i]    = rotateLeft(oldMeritsBuffer[i], 8);
-        hospitalBuff[i]       = rotateLeft(hospitalBuff[i], 8);
-        negoBuff[i]           = rotateLeft(negoBuff[i], 8);
-        locationNumBuff[i]    = rotateLeft(locationNumBuff[i], 8);
-        domesticStatusBuff[i] = rotateLeft(domesticStatusBuff[i], 8);
-        defSwordBuff[i]       = rotateLeft(defSwordBuff[i], 8);
-        defIceBuff[i]         = rotateLeft(defIceBuff[i], 8);
-        defFireBuff[i]        = rotateLeft(defFireBuff[i], 8);
-        defLightBuff[i]       = rotateLeft(defLightBuff[i], 8);
-        defDarkBuff[i]        = rotateLeft(defDarkBuff[i], 8);
+        currExpBuffer[i]      = g_rotateLeft(currExpBuffer[i], 8);
+        totalWinBuffer[i]     = g_rotateLeft(totalWinBuffer[i], 8);
+        totalLossBuffer[i]    = g_rotateLeft(totalLossBuffer[i], 8);
+        winsLastWeekBuffer[i] = g_rotateLeft(winsLastWeekBuffer[i], 8);
+        lossLastWeekBuffer[i] = g_rotateLeft(lossLastWeekBuffer[i], 8);
+        newMeritsBuffer[i]    = g_rotateLeft(newMeritsBuffer[i], 8);
+        oldMeritsBuffer[i]    = g_rotateLeft(oldMeritsBuffer[i], 8);
+        hospitalBuff[i]       = g_rotateLeft(hospitalBuff[i], 8);
+        negoBuff[i]           = g_rotateLeft(negoBuff[i], 8);
+        locationNumBuff[i]    = g_rotateLeft(locationNumBuff[i], 8);
+        domesticStatusBuff[i] = g_rotateLeft(domesticStatusBuff[i], 8);
+        defSwordBuff[i]       = g_rotateLeft(defSwordBuff[i], 8);
+        defIceBuff[i]         = g_rotateLeft(defIceBuff[i], 8);
+        defFireBuff[i]        = g_rotateLeft(defFireBuff[i], 8);
+        defLightBuff[i]       = g_rotateLeft(defLightBuff[i], 8);
+        defDarkBuff[i]        = g_rotateLeft(defDarkBuff[i], 8);
     }
     
     return;
@@ -385,8 +385,8 @@ void FileReader::fixTwoByteCastlesArrays(void)
 {
     for(int i = 0; i < 34; i++)
     {
-        castleCurrentTroops[i] = rotateLeft(castleCurrentTroops[i], 8);
-        castleExperience[i]    = rotateLeft(castleExperience[i], 8);
+        castleCurrentTroops[i] = g_rotateLeft(castleCurrentTroops[i], 8);
+        castleExperience[i]    = g_rotateLeft(castleExperience[i], 8);
     }
         
     return;
@@ -396,20 +396,20 @@ void FileReader::fixTwoByteDivisionsArrays (void)
 {
     for(int i = 0; i < 171; i++)
     {
-        divisionXcoordinate[i]   = rotateLeft(divisionXcoordinate[i], 8);
-        divisionYcoordinate[i]   = rotateLeft(divisionYcoordinate[i], 8);
-        divisionUnknown1Buff[i]  = rotateLeft(divisionUnknown1Buff[i], 8);
-        divisionUnknown2Buff[i]  = rotateLeft(divisionUnknown2Buff[i], 8);
-        divisionUnknown3Buff[i]  = rotateLeft(divisionUnknown3Buff[i], 8);
-        divisionUnknown4Buff[i]  = rotateLeft(divisionUnknown4Buff[i], 8);
-        divisionUnknown5Buff[i]  = rotateLeft(divisionUnknown5Buff[i], 8);
-        divisionUnknown6Buff[i]  = rotateLeft(divisionUnknown6Buff[i], 8);
-        divisionUnknown7Buff[i]  = rotateLeft(divisionUnknown7Buff[i], 8);
-        divisionUnknown8Buff[i]  = rotateLeft(divisionUnknown8Buff[i], 8);
-        divisionUnknown9Buff[i]  = rotateLeft(divisionUnknown9Buff[i], 8);
-        divisionUnknown10Buff[i] = rotateLeft(divisionUnknown10Buff[i], 8);
-        divisionUnknown11Buff[i] = rotateLeft(divisionUnknown11Buff[i], 8);
-        divisionUnknown12Buff[i] = rotateLeft(divisionUnknown12Buff[i], 8);
+        divisionXcoordinate[i]   = g_rotateLeft(divisionXcoordinate[i], 8);
+        divisionYcoordinate[i]   = g_rotateLeft(divisionYcoordinate[i], 8);
+        divisionUnknown1Buff[i]  = g_rotateLeft(divisionUnknown1Buff[i], 8);
+        divisionUnknown2Buff[i]  = g_rotateLeft(divisionUnknown2Buff[i], 8);
+        divisionUnknown3Buff[i]  = g_rotateLeft(divisionUnknown3Buff[i], 8);
+        divisionUnknown4Buff[i]  = g_rotateLeft(divisionUnknown4Buff[i], 8);
+        divisionUnknown5Buff[i]  = g_rotateLeft(divisionUnknown5Buff[i], 8);
+        divisionUnknown6Buff[i]  = g_rotateLeft(divisionUnknown6Buff[i], 8);
+        divisionUnknown7Buff[i]  = g_rotateLeft(divisionUnknown7Buff[i], 8);
+        divisionUnknown8Buff[i]  = g_rotateLeft(divisionUnknown8Buff[i], 8);
+        divisionUnknown9Buff[i]  = g_rotateLeft(divisionUnknown9Buff[i], 8);
+        divisionUnknown10Buff[i] = g_rotateLeft(divisionUnknown10Buff[i], 8);
+        divisionUnknown11Buff[i] = g_rotateLeft(divisionUnknown11Buff[i], 8);
+        divisionUnknown12Buff[i] = g_rotateLeft(divisionUnknown12Buff[i], 8);
     }
 
     return;

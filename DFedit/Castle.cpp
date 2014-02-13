@@ -324,7 +324,7 @@ bool Castle::addMultiGenFromList(int* const genBuff, const int genCount) // ****
                 genDeleted++;
                 j = numGenerals;
             }
-    insertionSort(genBuff, gCount);
+    g_insertionSort(genBuff, gCount);
     gCount -= genDeleted;
     if(!gCount)
         return false;
@@ -338,7 +338,7 @@ bool Castle::addMultiGenFromList(int* const genBuff, const int genCount) // ****
         genAdder++;
         gensAdded = true;
     }
-     insertionSort(generals, numGenerals); //after adding generals, sort list
+     g_insertionSort(generals, numGenerals); //after adding generals, sort list
 
     if(needRuler)
         changeRuler(generals[0]);
@@ -448,7 +448,7 @@ bool Castle::addMultiCapFromList(int* const capBuff, const int capCount)  // ***
                 capsDeleted++;
                 j = numGenerals;
             }
-    insertionSort(capBuff, cCount);
+    g_insertionSort(capBuff, cCount);
     cCount -= capsDeleted;
     if(!cCount)
         return false;
@@ -463,7 +463,7 @@ bool Castle::addMultiCapFromList(int* const capBuff, const int capCount)  // ***
                 capsDeleted++;
                 j = numCaptives;
             }
-    insertionSort(capBuff, cCount);
+    g_insertionSort(capBuff, cCount);
     cCount -= capsDeleted;
     if(!cCount)
         return false;
@@ -477,7 +477,7 @@ bool Castle::addMultiCapFromList(int* const capBuff, const int capCount)  // ***
         capAdder++;
         captivesAdded = true;
     }
-     insertionSort(captives, numCaptives); //after adding captives, sort list
+     g_insertionSort(captives, numCaptives); //after adding captives, sort list
 
     return captivesAdded;
 }
@@ -561,7 +561,7 @@ int Castle::fromGenToCap(int* const genBuff, const int genCount)  // ***********
         success = 1;
     }
 
-    insertionSort(captives, numCaptives);
+    g_insertionSort(captives, numCaptives);
 
     if(needRuler)
     {
@@ -605,7 +605,7 @@ bool Castle::fromCapToGen(int* const capBuff, const int capCount)// ************
         capsPromoted = true;
     }
 
-    insertionSort(generals, numGenerals);
+    g_insertionSort(generals, numGenerals);
 
     return capsPromoted;
 }
@@ -700,7 +700,7 @@ void Castle::addGeneral_a(const int genIndex)
                     dr.genArr[genIndex].setLocation(1, castleNum);
                 }
             }
-            insertionSort(generals, numGenerals);
+            g_insertionSort(generals, numGenerals);
         }
 
         needsUpdate = true;
@@ -769,7 +769,7 @@ void Castle::cleanCaptiveHolder(void)
                 dr.genArr[captives[i]].setStatus(4,1); //captive of AI
         }
         dr.capHolder.numHeld = 0; //captive array now clear
-        insertionSort(captives, numCaptives); //sort the castle captives array
+        g_insertionSort(captives, numCaptives); //sort the castle captives array
     }
 
     needsUpdate = true;

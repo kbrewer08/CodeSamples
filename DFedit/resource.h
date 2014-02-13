@@ -303,3 +303,50 @@
 #define ID_LB_FULL_ITEMLIST 584
 #define ID_BUT_REMOVE_ITEMS 585
 #define ID_BUT_ADD_ITEMS    586
+
+#define ID_SC_KS_WN_CAS     587
+#define ID_SC_KS_WN_GEN     588
+#define ID_SC_KS_WN_CAP     589
+#define ID_SC_KS_WN_WIN     590
+#define ID_SC_KS_WN_LOSS    591
+#define ID_SC_KS_GK_CAS     592
+#define ID_SC_KS_GK_GEN     593
+#define ID_SC_KS_GK_CAP     594
+#define ID_SC_KS_GK_WIN     595
+#define ID_SC_KS_GK_LOSS    596
+#define ID_SC_KS_TS_CAS     597
+#define ID_SC_KS_TS_GEN     598
+#define ID_SC_KS_TS_CAP     599
+#define ID_SC_KS_TS_WIN     600
+#define ID_SC_KS_TS_LOSS    601
+#define ID_SC_KS_MK_CAS     602
+#define ID_SC_KS_MK_GEN     603
+#define ID_SC_KS_MK_CAP     604
+#define ID_SC_KS_MK_WIN     605
+#define ID_SC_KS_MK_LOSS    606
+#define ID_SC_KS_RT_CAS     607
+#define ID_SC_KS_RT_GEN     608
+#define ID_SC_KS_RT_CAP     609
+#define ID_SC_KS_RT_WIN     610
+#define ID_SC_KS_RT_LOSS    611
+#define ID_SC_KS_LN_CAS     612
+#define ID_SC_KS_LN_GEN     613
+#define ID_SC_KS_LN_CAP     614
+#define ID_SC_KS_LN_WIN     615
+#define ID_SC_KS_LN_LOSS    616
+#define ID_SC_KS_GS_CAS     617
+#define ID_SC_KS_GS_GEN     618
+#define ID_SC_KS_GS_CAP     619
+#define ID_SC_KS_GS_WIN     620
+#define ID_SC_KS_GS_LOSS    621
+#define ID_SC_KS_JN_CAS     622
+#define ID_SC_KS_JN_GEN     623
+#define ID_SC_KS_JN_CAP     624
+#define ID_SC_KS_JN_WIN     625
+#define ID_SC_KS_JN_LOSS    626
+
+#define ID_KS_RB_GENS       627
+#define ID_KS_RB_CAPS       628
+#define ID_KS_RB_CASTLES    629
+
+// 630, 631, and 632 used for Kingdom Status tab

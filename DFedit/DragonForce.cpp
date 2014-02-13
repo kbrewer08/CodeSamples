@@ -746,6 +746,9 @@ DragonForce::DragonForce(const DragonForce& rhsDF)
     for(i = 0; i < 34; i++)
         casArr[i] = rhsDF.casArr[i];
 
+    for(int i = 0; i < 8; i++)
+        kingdoms[i] = rhsDF.kingdoms[i];
+
     j = rhsDF.capHolder.numHeld;
     for(int i = 0; i < j; i++)
         capHolder.holdArea[i] = rhsDF.capHolder.holdArea[i];
@@ -778,6 +781,9 @@ DragonForce& DragonForce::operator=(const DragonForce& rhsDF)
 
     for(i = 0; i < 34; i++)
         casArr[i] = rhsDF.casArr[i];
+
+    for(int i = 0; i < 8; i++)
+        kingdoms[i] = rhsDF.kingdoms[i];
 
     j = rhsDF.capHolder.numHeld;
     for(int i = 0; i < j; i++)
@@ -915,6 +921,67 @@ void DragonForce::initItemInv(void)
 
 void DragonForce::initKingdoms(void)
 {
+    for(int i = 0; i < 8; i++) //making sure everything is 0
+    {
+        kingdoms[i].numCastles    = 0;
+        kingdoms[i].numCaptives   = 0;
+        kingdoms[i].numGenerals   = 0;
+        kingdoms[i].kingdomWins   = 0;
+        kingdoms[i].kingdomLosses = 0;
+        
+        for(int j = 0; j < 34; j++)
+            kingdoms[i].ownedCastles[j] = 171;
+
+        for(int j = 0; j < 171; j++)
+        {
+            kingdoms[i].ownedGenerals[j] = 0;
+            kingdoms[i].ownedCaptives[j] = 0;
+        }
+    }
+
+    for(int i = 0; i < 8; i++)
+    {
+        kingdoms[i].kingdomName  = castlesNameList[i];
+        kingdoms[i].kingdomRuler = generalsNameList[i];
+    }
+
+    int casOwner = 0;
+    int casCount = 0;
+    for(int i = 0; i < 34; i++)  //who owns which castles
+    {
+        casOwner = castleOwnership[i];
+        if(casOwner < 8)
+        {
+            casCount = kingdoms[casOwner].numCastles;
+            kingdoms[casOwner].ownedCastles[casCount] = i;
+            kingdoms[casOwner].numCastles++;
+        }
+    }
+
+    int genOwner = 0;
+    int genCount = 0;
+    for(int i = 0; i < 171; i++) //which generals in which kingdoms
+    {
+        genOwner = officerOwner[i];
+        if(genOwner < 8)
+        {
+            if(genArr[i].fieldStatus1 == 3) //if a general in this kingdom
+            {
+                genCount = kingdoms[genOwner].numGenerals;
+                kingdoms[genOwner].ownedGenerals[genCount] = i;
+                kingdoms[genOwner].numGenerals++;
+                kingdoms[genOwner].kingdomWins   += genArr[i].newWins;
+                kingdoms[genOwner].kingdomLosses += genArr[i].newLosses;
+            }
+            if(genArr[i].fieldStatus1 == 4) //if captive of this kingdom
+            {
+                genCount = kingdoms[genOwner].numCaptives;
+                kingdoms[genOwner].ownedCaptives[genCount] = i;
+                kingdoms[genOwner].numCaptives++;
+            }
+        }
+    }
+
     return;
 }
 
@@ -951,7 +1018,7 @@ void DragonForce::addItemsInv(const int* const items, const int count)
         }
 
         itemInv.numItems = numItems;
-        insertionSort((int*)itemInv.items, itemInv.numItems);
+        g_insertionSort((int*)itemInv.items, itemInv.numItems);
 
         for(int i = 0; i < 256; i++)
             itemInventoryBuffer[i] = itemInv.items[i];
@@ -965,7 +1032,7 @@ void DragonForce::delItemsInv(const int* const items, const int count)
     for(int i = 0; i < count; i++)
         itemInv.items[items[i]] = 171;
 
-    insertionSort(itemInv.items, itemInv.numItems);
+    g_insertionSort(itemInv.items, itemInv.numItems);
     itemInv.numItems -= count;
 
     for(int i = 0; i < itemInv.numItems; i++)
@@ -982,17 +1049,17 @@ void DragonForce::delItemsInv(const int* const items, const int count)
 // GLOBALS
 //
 ////////////////////////////////////////////////////////////////////////////////
-ushort packByte(ushort highNibble, ushort lowNibble)
+ushort g_packByte(ushort highNibble, ushort lowNibble)
 {
     return lowNibble | (highNibble << 4);
 }
 
-ushort rotateLeft(ushort num, const int bits)
+ushort g_rotateLeft(ushort num, const int bits)
 {
     return ((num << bits) | num >> ((sizeof(num) * 8) - bits));
 }
 
-void insertionSort( int* const arr, const int size ) //standard insertion sort
+void g_insertionSort( int* const arr, const int size ) //standard insertion sort
 {
     int temp;
     int located; //used as bool

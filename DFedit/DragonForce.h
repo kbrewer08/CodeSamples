@@ -229,16 +229,18 @@ typedef struct
     int numHeld;
 } CAPTIVE_HOLDER;
 
-typedef struct //for kingdoms
+typedef struct //for kingdoms status information
 {
-    char kingdomeName[9];
-    char kingdomRuler[9];
-    int  numCastles;
-    int  numGenerals;
-    int  ownedCastlesIndex[34];
-    int  ownedGeneralsIndex[171];
-    int  kingdomWins;
-    int  kingdomLosses;
+    string kingdomName;
+    string kingdomRuler;
+    int    numCastles;
+    int    numGenerals;
+    int    numCaptives;
+    int    ownedCastles[34];
+    int    ownedGenerals[171];
+    int    ownedCaptives[171];
+    int    kingdomWins;
+    int    kingdomLosses;
 } KINGDOM;
 
 typedef struct //for Item Inventory
@@ -271,7 +273,7 @@ public:
 
     CAPTIVE_HOLDER capHolder;
     
-    DragonForce (void) : drFileName(""), playingAs(-1), itemInv(), capHolder() {}
+    DragonForce (void) : drFileName(""), playingAs(-1), genArr(), casArr(), divArr(), kingdoms(), itemInv(), capHolder() {}
     DragonForce (char savefileName[]) : drFileName(savefileName), fr(savefileName) {}
     ~DragonForce(void) {}
 
@@ -294,10 +296,11 @@ public:
 //
 // Global Program Functions
 //
+////////////////////////////////////////////////////////////////////////////////
 
-void insertionSort( int* const arr, const int size );
+void g_insertionSort( int* const arr, const int size );
 
-ushort packByte   (ushort highNibble, ushort lowNibble);
-ushort rotateLeft (ushort num, const int bits); // listing 12 at this link for endian-independent code http://www.ibm.com/developerworks/aix/library/au-endianc/
+ushort g_packByte   (ushort highNibble, ushort lowNibble);
+ushort g_rotateLeft (ushort num, const int bits); // listing 12 at this link for endian-independent code http://www.ibm.com/developerworks/aix/library/au-endianc/
 
 #endif

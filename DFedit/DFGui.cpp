@@ -79,13 +79,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     CreateDivisionsTab();
     CreateMassEditTab();
     CreateItemsTab();
+    CreateKingdomsTab();
 
     ShowWindow(hMainWindow, nCmdShow);
     UpdateWindow(hMainWindow);
 
     while(GetMessage(&msg, NULL, 0, 0) > 0)
     {
-        if((!hDlgCurrent) || (!IsDialogMessage(hDlgCurrent, &msg))) //works if hdlgcurrent in isdialogmessage is changed to hTabGenerals
+        if((!hDlgCurrent) || (!IsDialogMessage(hDlgCurrent, &msg)))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
@@ -142,6 +143,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                                 PopulateDivisionsTab();
                                 PopulateMassEditTab();
                                 PopulateItemsTab();
+                                updateKingdomsTab();
+                                enableKingdomRadioControls();
                                 sprintf(windowTitle, "%s - Playing as %s",DFeditVerLong, generalsNameList[dr.playingAs]);
                                 SetWindowText(hMainWindow, windowTitle);
                                 alreadyOpened = 1;
@@ -272,6 +275,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         ShowWindow(hTabCastles, SW_HIDE);
                         ShowWindow(hTabGenerals, SW_HIDE);
                         ShowWindow(hTabMassEdit, SW_HIDE);
+
+                        dr.initKingdoms();
+                        updateKingdomsTab();
 
                         SetFocus(hTabCntrl);
                         return 0;

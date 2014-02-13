@@ -1328,6 +1328,7 @@ void PopulateGeneralsTab(void)
     dr.initCastles();   //create the castles array
     dr.initDivisions(); //create the divisions array
     dr.initItemInv();   //create the item inventory from domestic affairs
+    dr.initKingdoms();  //fill in the status of each kingdom
 
     EnableWindow(GenTabCtrls.cb_GenNameList, TRUE); //turn on names list combobox
     EnableWindow(GenTabCtrls.cb_GenOwnerList, TRUE); //turn on owner's list combobox

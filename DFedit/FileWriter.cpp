@@ -41,7 +41,7 @@ int FileWriter::writeOneElementToFile(int address, int bytes, ushort newValue, i
     int isGood = 0;
     
     if(bytes == 2)
-        newValue = rotateLeft(newValue, 8); //convert to big endian if necessary
+        newValue = g_rotateLeft(newValue, 8); //convert to big endian if necessary
     
     if(!fpSavegame.is_open())
         openFileForWrite();
@@ -83,7 +83,7 @@ int FileWriter::writeInventoryToFile(void)
         openFileForWrite();
 
     for(int i = 0; i < 256; i++)
-        itemInventoryBuffer[i] = rotateLeft(itemInventoryBuffer[i], 8);
+        itemInventoryBuffer[i] = g_rotateLeft(itemInventoryBuffer[i], 8);
 
     fpSavegame.seekg(ITEM_INVENTORY);
     fpSavegame.write(reinterpret_cast<char*>(itemInventoryBuffer), 512);
