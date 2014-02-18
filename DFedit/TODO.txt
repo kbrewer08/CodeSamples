@@ -1,0 +1,9 @@
+- Privatize class data (C++)
+
+- convert C style arrays to C++ std::arrays (C++)
+
+- accelerator keys (Win32)
+
+- investigate resource vs programmatic (Win32)
+
+- check success/failure status of GUI functions and handle appropriately (Win32)
